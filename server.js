@@ -6,17 +6,9 @@ const cors = require('cors');
 app.get('/list-users', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-      //console.log( data );
       res.end( data );
    });
 })
-
-//app.all('/', function(req, res, next) {
-//    res.header("Access-Control-Allow-Origin", "*");
-//    res.header("Access-Control-Allow-Methods", "*");    
-//    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//    next()
-//});
 
 app.use(express.json());
 
@@ -37,7 +29,12 @@ function update_database(res, req) {
 	
 	var count = Object.keys(data).length;
 	var index = "user" + (1 + count);
-	var text = '{\"' + index + '\":' + '{' + '\"name\":\"' + name + '\", \"password\": \"' + password + '\", \"proffession\": \"' + profession + '\", \"id\": ' + (count+1) + '}' + '}';
+	var text = '{' + '\"name\":\"';
+	text += name + '\", \"password\": \"';
+	text += password + '\", \"proffession\": \"';
+	text += profession + '\", \"id\": ';
+	text += (count+1) + '}';
+	
 	var new_user = JSON.parse(text);
 	
 	data[index] = new_user;

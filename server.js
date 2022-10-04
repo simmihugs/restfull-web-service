@@ -1,13 +1,22 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
+const cors = require('cors');
 
 app.get('/list-users', function (req, res) {
-   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-      console.log( data );
+    res.header("Access-Control-Allow-Origin", "*");
+    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
+      //console.log( data );
       res.end( data );
    });
 })
+
+//app.all('/', function(req, res, next) {
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Methods", "*");    
+//    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//    next()
+//});
 
 app.use(express.json());
 

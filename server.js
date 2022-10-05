@@ -6,8 +6,8 @@ const cors = require('cors');
 app.get('/list-users', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-      res.end( data );
-   });
+	res.end( data );
+    });
 })
 
 app.use(express.json());
@@ -51,7 +51,7 @@ function update_database(res, req) {
 }    
 
 var server = app.listen(8081, function () {
-   var host = server.address().address
-   var port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port)
+    var host = server.address().address
+    var port = server.address().port
+    console.log("Example app listening at http://%s:%s", host, port)
 })
